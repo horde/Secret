@@ -27,7 +27,6 @@
  </stability>
  <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
  <notes>
-* 
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -127,7 +126,7 @@
    <date>2003-07-05</date>
    <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
    <notes>
-Initial release as a PEAR package
+* Initial release as a PEAR package
    </notes>
   </release>
   <release>
@@ -143,8 +142,8 @@ Initial release as a PEAR package
    </stability>
    <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
    <notes>
-- Converted to package.xml 2.0 for pear.horde.org
-- Return false instead of generating encryption errors if $key is empty (Bug #5925).
+* Converted to package.xml 2.0 for pear.horde.org
+* Return false instead of generating encryption errors if $key is empty (Bug #5925).
    </notes>
   </release>
   <release>
@@ -438,7 +437,6 @@ Initial release as a PEAR package
    <date>2017-10-20</date>
    <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
    <notes>
-* 
    </notes>
   </release>
  </changelog>
