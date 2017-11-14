@@ -59,7 +59,6 @@
       <file name="AllTests.php" role="test" />
       <file name="Autoload.php" role="test" />
       <file name="bootstrap.php" role="test" />
-      <file name="phpunit.xml" role="test" />
      </dir> <!-- /test/Horde/Secret -->
     </dir> <!-- /test/Horde -->
    </dir> <!-- /test -->
@@ -119,7 +118,6 @@
    <install as="Horde/Secret/AllTests.php" name="test/Horde/Secret/AllTests.php" />
    <install as="Horde/Secret/Autoload.php" name="test/Horde/Secret/Autoload.php" />
    <install as="Horde/Secret/bootstrap.php" name="test/Horde/Secret/bootstrap.php" />
-   <install as="Horde/Secret/phpunit.xml" name="test/Horde/Secret/phpunit.xml" />
    <install as="Horde/Secret/Stub/Message.php" name="test/Horde/Secret/Stub/Message.php" />
    <install as="Horde/Secret/Unit/SecretTest.php" name="test/Horde/Secret/Unit/SecretTest.php" />
   </filelist>
