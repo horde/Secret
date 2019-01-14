@@ -2,7 +2,7 @@
 id: Secret
 name: Secret
 full: Secret key encryption library
-description: >
+description: >-
   An API for encrypting and decrypting small pieces of data with the use of a
   shared key.
 list: dev
