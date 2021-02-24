@@ -26,14 +26,14 @@
     ],
     "require": {
         "horde/horde-installer-plugin": "*",
-        "php": "^5.3 || ^7",
-        "horde/crypt_blowfish": "^1",
-        "horde/exception": "^2",
-        "horde/support": "^2",
+        "php": "^7",
+        "horde/crypt_blowfish": "^2",
+        "horde/exception": "^3",
+        "horde/support": "^3",
         "ext-hash": "*"
     },
     "suggest": {
-        "horde/test": "^2.1"
+        "horde/test": "^3"
     },
     "autoload": {
         "psr-0": {
