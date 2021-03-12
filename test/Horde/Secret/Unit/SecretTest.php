@@ -10,6 +10,10 @@
  * @author     Michael Slusarz <slusarz@horde.org>
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
  */
+namespace Horde\Secret\Unit;
+use PHPUnit\Framework\TestCase;
+use \Horde_Secret;
+use \Horde_Secret_Stub_Message;
 
 /**
  * Test the secret class.
@@ -26,7 +30,7 @@
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
  */
 
-class Horde_Secret_Unit_SecretTest extends PHPUnit_Framework_TestCase
+class SecretTest extends TestCase
 {
     public function test8BitKey()
     {
@@ -76,6 +80,7 @@ class Horde_Secret_Unit_SecretTest extends PHPUnit_Framework_TestCase
      */
     public function testKeyException()
     {
+        $this->expectException('Horde_Secret_Exception');
         $secret = new Horde_Secret();
         $secret->read(new Horde_Secret_Stub_Message(), "\x01");
     }
