@@ -1,4 +1,5 @@
 {
+    "minimum-stability": "dev",
     "name": "horde/secret",
     "description": "Secret key encryption library",
     "type": "library",
@@ -25,13 +26,13 @@
     ],
     "require": {
         "php": "^7",
-        "horde/crypt_blowfish": "^2",
-        "horde/exception": "^3",
-        "horde/support": "^3",
+        "horde/crypt_blowfish": "^2 || dev-FRAMEWORK_6_0",
+        "horde/exception": "^3 || dev-FRAMEWORK_6_0",
+        "horde/support": "^3 || dev-FRAMEWORK_6_0",
         "ext-hash": "*"
     },
     "suggest": {
-        "horde/test": "^3"
+        "horde/test": "^3 || dev-FRAMEWORK_6_0"
     },
     "autoload": {
         "psr-0": {
