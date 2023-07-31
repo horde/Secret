@@ -26,7 +26,7 @@
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
  */
 
-class Horde_Secret_Unit_SecretTest extends PHPUnit_Framework_TestCase
+class Horde_Secret_Unit_SecretTest extends Horde_Test_Case
 {
     public function test8BitKey()
     {
@@ -71,11 +71,9 @@ class Horde_Secret_Unit_SecretTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($plaintext, $secret->read($key, $secret->write($key, $plaintext)));
     }
 
-    /**
-     * @expectedException Horde_Secret_Exception
-     */
     public function testKeyException()
     {
+        $this->expectException('Horde_Secret_Exception');
         $secret = new Horde_Secret();
         $secret->read(new Horde_Secret_Stub_Message(), "\x01");
     }
