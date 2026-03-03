@@ -98,11 +98,28 @@ final class SecretManager
     }
 
     /**
+     * Derive a 32-byte key from variable-length input.
+     *
+     * Uses HKDF (HMAC-based Key Derivation Function) to derive a consistent
+     * 32-byte key from any length input.
+     *
+     * @param string $key Input key (any length)
+     *
+     * @return string 32-byte derived key
+     */
+    private static function deriveKey(string $key): string
+    {
+        // Use HKDF to derive a 32-byte key
+        // This ensures we always have a proper 256-bit key for modern ciphers
+        return hash_hkdf('sha256', $key, 32, 'horde-secret-v1');
+    }
+
+    /**
      * Create with automatic cipher selection.
      *
      * Prefers Sodium, falls back to AES-GCM if Sodium unavailable.
      *
-     * @param string $key Encryption key (32 bytes recommended)
+     * @param string $key Encryption key (any length, will be derived to 32 bytes)
      *
      * @return self
      *
@@ -130,7 +147,7 @@ final class SecretManager
      *
      * Recommended for new deployments.
      *
-     * @param string $key Encryption key (must be 32 bytes)
+     * @param string $key Encryption key (any length, will be derived to 32 bytes)
      *
      * @return self
      *
@@ -144,7 +161,8 @@ final class SecretManager
             );
         }
 
-        return new self(new SodiumCipher($key), $key);
+        $derivedKey = self::deriveKey($key);
+        return new self(new SodiumCipher($derivedKey), $key);
     }
 
     /**
@@ -152,7 +170,7 @@ final class SecretManager
      *
      * Good fallback when Sodium unavailable.
      *
-     * @param string $key Encryption key (must be 32 bytes)
+     * @param string $key Encryption key (any length, will be derived to 32 bytes)
      *
      * @return self
      *
@@ -166,7 +184,8 @@ final class SecretManager
             );
         }
 
-        return new self(new AesGcmCipher($key), $key);
+        $derivedKey = self::deriveKey($key);
+        return new self(new AesGcmCipher($derivedKey), $key);
     }
 
     /**
@@ -253,13 +272,28 @@ final class SecretManager
      */
     private function decryptLegacy(string $ciphertext): string
     {
+        // Validate ciphertext looks reasonable (not just random garbage)
+        if (strlen($ciphertext) < 8) {
+            throw new DecryptionException(
+                'Invalid legacy ciphertext: too short'
+            );
+        }
+
         if ($this->legacyCipher === null) {
             throw new DecryptionException(
                 'Cannot decrypt legacy format: Blowfish cipher not available'
             );
         }
 
-        return $this->legacyCipher->decrypt($ciphertext);
+        try {
+            return $this->legacyCipher->decrypt($ciphertext);
+        } catch (\Exception $e) {
+            throw new DecryptionException(
+                'Failed to decrypt legacy format: ' . $e->getMessage(),
+                0,
+                $e
+            );
+        }
     }
 
     /**
@@ -287,7 +321,13 @@ final class SecretManager
             );
         }
 
-        return new $cipherClass($this->key);
+        // For Blowfish, use original key (no derivation needed)
+        // For modern ciphers, derive key to 32 bytes
+        $key = ($cipherClass === BlowfishCipher::class)
+            ? $this->key
+            : self::deriveKey($this->key);
+
+        return new $cipherClass($key);
     }
 
     /**
