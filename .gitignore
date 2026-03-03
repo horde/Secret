@@ -27,3 +27,12 @@ run-tests.log
 /test/*/*/*/*.log
 /test/*/*/*/*.out
 
+# PHPUnit cache and coverage
+.phpunit.cache/
+.phpunit.result.cache
+build/
+
+# Composer
+vendor/
+composer.lock
+
