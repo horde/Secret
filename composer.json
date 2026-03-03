@@ -40,6 +40,9 @@
     "autoload": {
         "psr-0": {
             "Horde_Secret": "lib/"
+        },
+        "psr-4": {
+            "Horde\\Secret\\": "src/"
         }
     },
     "autoload-dev": {
