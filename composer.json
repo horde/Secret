@@ -1,11 +1,9 @@
 {
-    "minimum-stability": "dev",
     "name": "horde/secret",
-    "description": "Secret key encryption library with authenticated encryption (Libsodium XSalsa20-Poly1305, AES-256-GCM) and legacy Blowfish support",
+    "description": "Secret key encryption library with authenticated encryption",
     "type": "library",
     "homepage": "https://www.horde.org/libraries/Horde_Secret",
     "license": "LGPL-2.1-only",
-    "keywords": ["encryption", "secret", "horde", "libsodium", "aes-gcm", "authenticated-encryption", "aead"],
     "authors": [
         {
             "name": "Chuck Hagenbuch",
@@ -18,26 +16,19 @@
             "role": "lead"
         }
     ],
-    "time": "2022-11-04",
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://horde-satis.maintaina.com"
-        }
-    ],
+    "time": "2026-03-07",
+    "repositories": [],
     "require": {
         "php": "^8.1",
         "horde/crypt_blowfish": "^2 || dev-FRAMEWORK_6_0",
         "horde/exception": "^3 || dev-FRAMEWORK_6_0",
         "ext-hash": "*"
     },
-    "require-dev": {
-        "phpunit/phpunit": "^11.5"
-    },
+    "require-dev": {},
     "suggest": {
-        "ext-sodium": "For modern XSalsa20-Poly1305 authenticated encryption (recommended, bundled with PHP 7.2+)",
-        "ext-openssl": "For AES-256-GCM authenticated encryption fallback",
-        "horde/test": "^3 || dev-FRAMEWORK_6_0"
+        "horde/test": "^3 || dev-FRAMEWORK_6_0",
+        "ext-sodium": "*",
+        "ext-openssl": "*"
     },
     "autoload": {
         "psr-0": {
@@ -53,8 +44,11 @@
         }
     },
     "config": {
-        "allow-plugins": {
-            "horde/horde-installer-plugin": true
+        "allow-plugins": {}
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-FRAMEWORK_6_0": "3.x-dev"
         }
     }
 }

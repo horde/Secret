@@ -36,3 +36,19 @@ build/
 vendor/
 composer.lock
 
+
+# Added by horde-components QC --fix-qc-issues
+# PHPStorm IDE settings
+/.idea/
+# VSCode IDE settings
+/.vscode/
+# Claude Code CLI cache and state
+/.claude/
+# Cline extension data
+/.cline/
+# PHP CS Fixer cache file
+/.php-cs-fixer.cache
+# PHPStan local configuration (if not committed)
+/phpstan.neon
+# PHPStan cache directory
+/.phpstan.cache/

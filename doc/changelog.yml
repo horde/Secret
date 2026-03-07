@@ -72,3 +72,25 @@
     uri: http://www.horde.org/licenses/lgpl21
   notes: |
     [mjr] Converted to PHP namespaces and Composer.
+3.0.0-alpha7:
+  api: 3.0.0-alpha7
+  state:
+    release: alpha
+    api: alpha
+  date: 2026-03-07
+  license:
+    identifier: LGPL-2.1-only
+    uri: https://spdx.org/licenses/LGPL-2.1-only.html
+  notes: |-
+    docs: add comprehensive documentation and update package metadata
+    chore: update PSR-0 compatibility layer and add integration tests
+    test: add comprehensive PSR-4 unit tests with migration scenarios
+    feat: implement PSR-4 core with modern authenticated encryption
+    test: modernize test suite to PHPUnit 11+ with attributes
+    Development mode for Secret-3.0.0alpha5
+    Released Secret-3.0.0alpha4
+    Update metadata and workflows for PHP 8 support
+    Add CI job for satis repo update
+    no errors, ci.yml added and bootstrap.php adapted
+    no errors left
+    Development mode for Secret-3.0.0alpha5

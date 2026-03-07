@@ -2,11 +2,8 @@
 id: Secret
 name: Secret
 full: Secret key encryption library with authenticated encryption
-description: >-
-  A library for encrypting and decrypting small pieces of data with modern
-  authenticated encryption (Libsodium XSalsa20-Poly1305, AES-256-GCM) or
-  legacy Blowfish. Provides dual-stack API: PSR-4 modern SecretManager with
-  AEAD support, and PSR-0 Horde_Secret for backward compatibility.
+description: |-
+  A library for encrypting and decrypting small pieces of data with modern authenticated encryption (Libsodium XSalsa20-Poly1305, AES-256-GCM) or legacy Blowfish. Provides dual-stack API: PSR-4 modern SecretManager with AEAD support, and PSR-0 Horde_Secret for backward compatibility.
 list: dev
 type: library
 homepage: https://www.horde.org/libraries/Horde_Secret
@@ -24,7 +21,7 @@ authors:
     active: false
     role: lead
 version:
-  release: 3.0.0alpha6
+  release: 3.0.0-alpha7
   api: 3.0.0alpha1
 state:
   release: alpha
@@ -46,3 +43,4 @@ dependencies:
     ext:
       sodium: '*'
       openssl: '*'
+vendor: horde
