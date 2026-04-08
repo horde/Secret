@@ -44,3 +44,6 @@ dependencies:
       sodium: '*'
       openssl: '*'
 vendor: horde
+keywords:
+  - encryption
+  - aes
