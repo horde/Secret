@@ -399,4 +399,119 @@ class SecretManagerTest extends TestCase
             $this->assertEquals('old data', $finalDecrypted);
         }
     }
+
+    public function testDeriveKeyIsDeterministic(): void
+    {
+        // Same input key must produce identical SecretManager behavior
+        $key = 'deterministic-test-key';
+
+        $secret1 = SecretManager::create($key);
+        $secret2 = SecretManager::create($key);
+
+        $encrypted = $secret1->encrypt('test data');
+        $decrypted = $secret2->decrypt($encrypted);
+
+        $this->assertEquals('test data', $decrypted);
+    }
+
+    public function testDeriveKeyWithEmptyKeyThrows(): void
+    {
+        // hash_hkdf rejects empty key input
+        $this->expectException(\ValueError::class);
+        SecretManager::create('');
+    }
+
+    public function testDecryptLegacyTooShortThrows(): void
+    {
+        $secret = SecretManager::create($this->key);
+
+        // 7 bytes: below the 8-byte minimum for legacy Blowfish
+        $this->expectException(DecryptionException::class);
+        $this->expectExceptionMessage('too short');
+        $secret->decrypt(str_repeat('x', 7));
+    }
+
+    public function testDecryptLegacyExactlyEightBytes(): void
+    {
+        if (!BlowfishCipher::isSupported()) {
+            $this->markTestSkipped('Blowfish not available');
+        }
+
+        $key = 'test-key';
+        $secret = SecretManager::create($key);
+
+        // Encrypt a short message with legacy PSR-0 to get valid 8-byte+ ciphertext
+        $legacySecret = new Horde_Secret();
+        $ciphertext = $legacySecret->write($key, 'abcdefgh');
+
+        // Should not throw — valid Blowfish block
+        $decrypted = $secret->decrypt($ciphertext);
+        $this->assertEquals('abcdefgh', $decrypted);
+    }
+
+    public function testDecryptUnknownCipherVersionThrows(): void
+    {
+        $secret = SecretManager::create($this->key);
+
+        // Version 0x04 is not in CIPHER_REGISTRY
+        $fakeData = new EncryptedData(0x04, str_repeat('x', 40));
+
+        $this->expectException(UnsupportedCipherException::class);
+        $this->expectExceptionMessage('Unknown cipher version: 0x04');
+        $secret->decrypt($fakeData);
+    }
+
+    public function testNeedsReEncryptionWithEncryptedDataObject(): void
+    {
+        $secret = SecretManager::create($this->key);
+
+        // Current cipher — no re-encryption needed
+        $encrypted = $secret->encrypt('data');
+        $this->assertFalse($secret->needsReEncryption($encrypted));
+    }
+
+    public function testNeedsReEncryptionWithEncryptedDataDifferentVersion(): void
+    {
+        if (!SodiumCipher::isSupported() || !AesGcmCipher::isSupported()) {
+            $this->markTestSkipped('Need both Sodium and AES-GCM');
+        }
+
+        // Encrypt with AES-GCM, check with Sodium manager
+        $aesSecret = SecretManager::withAesGcm($this->key);
+        $encrypted = $aesSecret->encrypt('data');
+
+        $sodiumSecret = SecretManager::withSodium($this->key);
+        $this->assertTrue($sodiumSecret->needsReEncryption($encrypted));
+    }
+
+    public function testBlowfishKeyBypassesHkdf(): void
+    {
+        if (!BlowfishCipher::isSupported()) {
+            $this->markTestSkipped('Blowfish not available');
+        }
+
+        $key = 'test-key-12345';
+
+        // PSR-0 uses key directly with Blowfish
+        $legacySecret = new Horde_Secret();
+        $legacyCiphertext = $legacySecret->write($key, 'blowfish data');
+
+        // SecretManager::withBlowfish must also use key directly (no HKDF)
+        // so it can decrypt legacy data
+        $manager = SecretManager::withBlowfish($key);
+        $decrypted = $manager->decrypt($legacyCiphertext);
+
+        $this->assertEquals('blowfish data', $decrypted);
+    }
+
+    public function testDecryptStringWithUnknownVersionInHeader(): void
+    {
+        $secret = SecretManager::create($this->key);
+
+        // Manually craft string with HS header but unknown version 0xFF
+        $fakeString = 'HS' . chr(0xFF) . str_repeat('x', 40);
+
+        $this->expectException(UnsupportedCipherException::class);
+        $secret->decrypt($fakeString);
+    }
 }
