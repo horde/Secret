@@ -1,77 +1,14 @@
 ---
-3.0.0alpha6:
-  api: 3.0.0alpha1
+3.0.0:
+  api: 3.0.0
   state:
-    release: alpha
-    api: alpha
-  date: 2026-03-03
+    release: stable
+    api: stable
+  date: 2026-06-27
   license:
     identifier: LGPL-2.1-only
-    uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    [jan] Add PSR-4 implementation with modern authenticated encryption.
-    [jan] Add Libsodium XSalsa20-Poly1305 cipher support (version 0x02).
-    [jan] Add AES-256-GCM cipher support (version 0x03).
-    [jan] Add automatic legacy format detection and migration helpers.
-    [jan] Add comprehensive test suite with PHPUnit 11+ attributes.
-    [jan] Require PHP ^8.1.
-    [jan] PSR-0 API remains fully backward compatible (no breaking changes).
-    [jan] Add README.md and UPGRADING.md documentation.
-3.0.0alpha5:
-  api: 3.0.0alpha1
-  state:
-    release: alpha
-    api: alpha
-  date: 2023-11-21
-  license:
-    identifier: LGPL-2.1-only
-    uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    [mjr] Prepare for PHP 8.3.
-3.0.0alpha4:
-  api: 3.0.0alpha1
-  state:
-    release: alpha
-    api: alpha
-  date: 2021-03-20
-  license:
-    identifier: LGPL-2.1-only
-    uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    [mjr] Add support for PHP 8.
-3.0.0alpha3:
-  api: 3.0.0alpha1
-  state:
-    release: alpha
-    api: alpha
-  date: 2020-10-23
-  license:
-    identifier: LGPL-2.1-only
-    uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    [jan] Fix horde-components changelog entry.
-3.0.0alpha2:
-  api: 3.0.0alpha1
-  state:
-    release: alpha
-    api: alpha
-  date: 2020-10-22
-  license:
-    identifier: LGPL-2.1-only
-    uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    [jan] Update composer information.
-3.0.0alpha1:
-  api: 3.0.0alpha1
-  state:
-    release: alpha
-    api: alpha
-  date: 2017-03-09
-  license:
-    identifier: LGPL-2.1-only
-    uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    [mjr] Converted to PHP namespaces and Composer.
+    uri: https://spdx.org/licenses/LGPL-2.1-only.html
+  notes: "chore: refresh qc fixes and platform deps\nchore: Update workflow dependency"
 3.0.0-beta1:
   api: 3.0.0-beta1
   state:
@@ -81,8 +18,7 @@
   license:
     identifier: LGPL-2.1-only
     uri: https://spdx.org/licenses/LGPL-2.1-only.html
-  notes: |-
-    test: Added new test case for SecretManager
+  notes: 'test: Added new test case for SecretManager'
 3.0.0-alpha7:
   api: 3.0.0-alpha7
   state:
@@ -92,16 +28,64 @@
   license:
     identifier: LGPL-2.1-only
     uri: https://spdx.org/licenses/LGPL-2.1-only.html
-  notes: |-
-    docs: add comprehensive documentation and update package metadata
-    chore: update PSR-0 compatibility layer and add integration tests
-    test: add comprehensive PSR-4 unit tests with migration scenarios
-    feat: implement PSR-4 core with modern authenticated encryption
-    test: modernize test suite to PHPUnit 11+ with attributes
-    Development mode for Secret-3.0.0alpha5
-    Released Secret-3.0.0alpha4
-    Update metadata and workflows for PHP 8 support
-    Add CI job for satis repo update
-    no errors, ci.yml added and bootstrap.php adapted
-    no errors left
-    Development mode for Secret-3.0.0alpha5
+  notes: "docs: add comprehensive documentation and update package metadata\nchore: update PSR-0 compatibility layer and add integration tests\ntest: add comprehensive PSR-4 unit tests with migration scenarios\nfeat: implement PSR-4 core with modern authenticated encryption\ntest: modernize test suite to PHPUnit 11+ with attributes\nDevelopment mode for Secret-3.0.0alpha5\nReleased Secret-3.0.0alpha4\nUpdate metadata and workflows for PHP 8 support\nAdd CI job for satis repo update\nno errors, ci.yml added and bootstrap.php adapted\nno errors left\nDevelopment mode for Secret-3.0.0alpha5"
+3.0.0alpha6:
+  api: 3.0.0alpha1
+  state:
+    release: alpha
+    api: alpha
+  date: 2026-03-03
+  license:
+    identifier: LGPL-2.1-only
+    uri: http://www.horde.org/licenses/lgpl21
+  notes: "[jan] Add PSR-4 implementation with modern authenticated encryption.\n[jan] Add Libsodium XSalsa20-Poly1305 cipher support (version 0x02).\n[jan] Add AES-256-GCM cipher support (version 0x03).\n[jan] Add automatic legacy format detection and migration helpers.\n[jan] Add comprehensive test suite with PHPUnit 11+ attributes.\n[jan] Require PHP ^8.1.\n[jan] PSR-0 API remains fully backward compatible (no breaking changes).\n[jan] Add README.md and UPGRADING.md documentation.\n"
+3.0.0alpha5:
+  api: 3.0.0alpha1
+  state:
+    release: alpha
+    api: alpha
+  date: 2023-11-21
+  license:
+    identifier: LGPL-2.1-only
+    uri: http://www.horde.org/licenses/lgpl21
+  notes: "[mjr] Prepare for PHP 8.3.\n"
+3.0.0alpha4:
+  api: 3.0.0alpha1
+  state:
+    release: alpha
+    api: alpha
+  date: 2021-03-20
+  license:
+    identifier: LGPL-2.1-only
+    uri: http://www.horde.org/licenses/lgpl21
+  notes: "[mjr] Add support for PHP 8.\n"
+3.0.0alpha3:
+  api: 3.0.0alpha1
+  state:
+    release: alpha
+    api: alpha
+  date: 2020-10-23
+  license:
+    identifier: LGPL-2.1-only
+    uri: http://www.horde.org/licenses/lgpl21
+  notes: "[jan] Fix horde-components changelog entry.\n"
+3.0.0alpha2:
+  api: 3.0.0alpha1
+  state:
+    release: alpha
+    api: alpha
+  date: 2020-10-22
+  license:
+    identifier: LGPL-2.1-only
+    uri: http://www.horde.org/licenses/lgpl21
+  notes: "[jan] Update composer information.\n"
+3.0.0alpha1:
+  api: 3.0.0alpha1
+  state:
+    release: alpha
+    api: alpha
+  date: 2017-03-09
+  license:
+    identifier: LGPL-2.1-only
+    uri: http://www.horde.org/licenses/lgpl21
+  notes: "[mjr] Converted to PHP namespaces and Composer.\n"
