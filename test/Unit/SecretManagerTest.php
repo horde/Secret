@@ -28,6 +28,7 @@ use Horde\Secret\Exception\DecryptionException;
 use Horde\Secret\Exception\UnsupportedCipherException;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
+use ValueError;
 
 #[CoversClass(SecretManager::class)]
 class SecretManagerTest extends TestCase
@@ -417,7 +418,7 @@ class SecretManagerTest extends TestCase
     public function testDeriveKeyWithEmptyKeyThrows(): void
     {
         // hash_hkdf rejects empty key input
-        $this->expectException(\ValueError::class);
+        $this->expectException(ValueError::class);
         SecretManager::create('');
     }
 

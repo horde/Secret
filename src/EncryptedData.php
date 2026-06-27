@@ -18,6 +18,8 @@ declare(strict_types=1);
 
 namespace Horde\Secret;
 
+use InvalidArgumentException;
+
 /**
  * Immutable value object containing encrypted data with format header.
  *
@@ -55,7 +57,7 @@ final readonly class EncryptedData
     ) {
         // Validate version is in valid range (0x01-0xFF)
         if ($version < 0x01 || $version > 0xFF) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 "Version must be between 0x01 and 0xFF, got: 0x" . dechex($version)
             );
         }
@@ -71,19 +73,19 @@ final readonly class EncryptedData
      *
      * @return self
      *
-     * @throws \InvalidArgumentException If format is invalid
+     * @throws InvalidArgumentException If format is invalid
      */
     public static function fromString(string $data): self
     {
         if (strlen($data) < 4) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 'Encrypted data too short (minimum 4 bytes: header + version + payload)'
             );
         }
 
         // Check magic header
         if (substr($data, 0, 2) !== self::MAGIC) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 'Invalid format: missing magic header "HS"'
             );
         }
@@ -155,13 +157,13 @@ final readonly class EncryptedData
      *
      * @return self
      *
-     * @throws \InvalidArgumentException If Base64 decoding fails or format invalid
+     * @throws InvalidArgumentException If Base64 decoding fails or format invalid
      */
     public static function fromBase64(string $base64): self
     {
         $decoded = base64_decode($base64, true);
         if ($decoded === false) {
-            throw new \InvalidArgumentException('Invalid Base64 encoding');
+            throw new InvalidArgumentException('Invalid Base64 encoding');
         }
 
         return self::fromString($decoded);
@@ -174,7 +176,7 @@ final readonly class EncryptedData
      *
      * @return self
      *
-     * @throws \InvalidArgumentException If decoding fails or format invalid
+     * @throws InvalidArgumentException If decoding fails or format invalid
      */
     public static function fromBase64Url(string $base64url): self
     {

@@ -31,6 +31,4 @@ namespace Horde\Secret\Exception;
  * @license   http://www.horde.org/licenses/lgpl21 LGPL 2.1
  * @package   Secret
  */
-class UnsupportedCipherException extends SecretException
-{
-}
+class UnsupportedCipherException extends SecretException {}

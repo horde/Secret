@@ -27,7 +27,7 @@
 class Horde_Secret_Exception extends Horde_Exception_Wrapped
 {
     // Error codes for backward compatibility
-    const NO_BLOWFISH_LIB = 0; // 0 for BC
-    const KEY_NOT_STRING = 2;
-    const KEY_ZERO_LENGTH = 3;
+    public const NO_BLOWFISH_LIB = 0; // 0 for BC
+    public const KEY_NOT_STRING = 2;
+    public const KEY_ZERO_LENGTH = 3;
 }

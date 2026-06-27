@@ -21,6 +21,8 @@ namespace Horde\Secret\Cipher;
 use Horde\Secret\Exception\EncryptionException;
 use Horde\Secret\Exception\DecryptionException;
 use Horde\Secret\Exception\InvalidKeyException;
+use Error;
+use Exception;
 
 /**
  * Sodium cipher using XSalsa20-Poly1305 authenticated encryption.
@@ -112,7 +114,7 @@ final class SodiumCipher implements CipherInterface
 
             // Return: nonce + ciphertext (which includes auth tag)
             return $nonce . $ciphertext;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             throw new EncryptionException(
                 'Encryption failed: ' . $e->getMessage(),
                 0,
@@ -154,7 +156,7 @@ final class SodiumCipher implements CipherInterface
             return $plaintext;
         } catch (DecryptionException $e) {
             throw $e;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             throw new DecryptionException(
                 'Decryption failed: ' . $e->getMessage(),
                 0,
@@ -204,7 +206,7 @@ final class SodiumCipher implements CipherInterface
     {
         try {
             sodium_memzero($this->key);
-        } catch (\Error) {
+        } catch (Error) {
             // Key is readonly, can't be zeroed
             // This is acceptable - PHP will clean up memory
         }

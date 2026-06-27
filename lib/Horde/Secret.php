@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Provides an API for encrypting and decrypting small pieces of data with the
  * use of a shared key stored in a cookie.
@@ -17,33 +18,33 @@
 class Horde_Secret
 {
     /** Generic, default keyname. */
-    const DEFAULT_KEY = 'generic';
+    public const DEFAULT_KEY = 'generic';
 
     /**
      * Configuration parameters.
      *
      * @var array
      */
-    protected $_params = array(
+    protected $_params = [
         'cookie_domain' => '',
         'cookie_path' => '',
         'cookie_ssl' => false,
-        'session_name' => 'horde_secret'
-    );
+        'session_name' => 'horde_secret',
+    ];
 
     /**
      * Cipher cache.
      *
      * @var array
      */
-    protected $_cipherCache = array();
+    protected $_cipherCache = [];
 
     /**
      * Key cache.
      *
      * @var array
      */
-    protected $_keyCache = array();
+    protected $_keyCache = [];
 
     /**
      * Constructor.
@@ -54,7 +55,7 @@ class Horde_Secret
      *   - cookie_ssl: (boolean) Only transmit cookie securely?
      *   - session_name: (string) The cookie session name.
      */
-    public function __construct($params = array())
+    public function __construct($params = [])
     {
         $this->_params = array_merge($this->_params, $params);
     }
@@ -187,8 +188,8 @@ class Horde_Secret
      */
     public function clearKey($keyname = self::DEFAULT_KEY)
     {
-        if (isset($_COOKIE[$this->_params['session_name']]) &&
-            isset($_COOKIE[$keyname . '_key'])) {
+        if (isset($_COOKIE[$this->_params['session_name']])
+            && isset($_COOKIE[$keyname . '_key'])) {
             $this->_setCookie($keyname, false);
             return true;
         }

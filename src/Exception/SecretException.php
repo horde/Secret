@@ -28,6 +28,4 @@ use Exception;
  * @license   http://www.horde.org/licenses/lgpl21 LGPL 2.1
  * @package   Secret
  */
-class SecretException extends Exception
-{
-}
+class SecretException extends Exception {}

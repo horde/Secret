@@ -22,6 +22,7 @@ use Horde\Secret\EncryptedData;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
+use InvalidArgumentException;
 
 #[CoversClass(EncryptedData::class)]
 class EncryptedDataTest extends TestCase
@@ -63,7 +64,7 @@ class EncryptedDataTest extends TestCase
 
     public function testFromStringRejectsInvalidFormat(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('missing magic header');
 
         EncryptedData::fromString('XX' . chr(0x02) . 'payload');
@@ -71,7 +72,7 @@ class EncryptedDataTest extends TestCase
 
     public function testFromStringRejectsTooShort(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('too short');
 
         EncryptedData::fromString('HS');
@@ -79,7 +80,7 @@ class EncryptedDataTest extends TestCase
 
     public function testConstructorRejectsInvalidVersion(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Version must be between');
 
         new EncryptedData(0x00, 'payload');
@@ -87,7 +88,7 @@ class EncryptedDataTest extends TestCase
 
     public function testConstructorRejectsVersionTooHigh(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
 
         new EncryptedData(0x100, 'payload');
     }
@@ -121,7 +122,7 @@ class EncryptedDataTest extends TestCase
 
     public function testFromBase64RejectsInvalidBase64(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid Base64 encoding');
 
         EncryptedData::fromBase64('not valid base64!!!');
@@ -158,7 +159,7 @@ class EncryptedDataTest extends TestCase
         $encrypted = new EncryptedData(0x02, 'payload');
 
         // __toString should return Base64
-        $this->assertEquals($encrypted->toBase64(), (string)$encrypted);
+        $this->assertEquals($encrypted->toBase64(), (string) $encrypted);
     }
 
     public static function versionProvider(): array

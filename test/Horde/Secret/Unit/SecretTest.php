@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Test the secret class.
  *
@@ -10,15 +11,17 @@
  * @author     Michael Slusarz <slusarz@horde.org>
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
  */
+
 namespace Horde\Secret\Unit;
+
 use PHPUnit\Framework\TestCase;
-use \Horde_Secret;
-use \Horde_Secret_Stub_Message;
+use Horde_Secret;
+use Horde_Secret_Stub_Message;
 
 /**
  * Test the secret class.
  *
- * Copyright 2009-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2009-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -28,6 +31,7 @@ use \Horde_Secret_Stub_Message;
  * @subpackage UnitTests
  * @author     Michael Slusarz <slusarz@horde.org>
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
+ * @coversNothing
  */
 
 class SecretTest extends TestCase

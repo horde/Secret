@@ -22,6 +22,7 @@ use Horde_Crypt_Blowfish;
 use Horde\Secret\Exception\EncryptionException;
 use Horde\Secret\Exception\DecryptionException;
 use Horde\Secret\Exception\InvalidKeyException;
+use Exception;
 
 /**
  * Blowfish cipher adapter wrapping Horde_Crypt_Blowfish.
@@ -92,7 +93,7 @@ final class BlowfishCipher implements CipherInterface
 
         try {
             $this->cipher = new Horde_Crypt_Blowfish($this->key);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             throw new InvalidKeyException(
                 'Failed to initialize Blowfish cipher: ' . $e->getMessage(),
                 0,
@@ -129,7 +130,7 @@ final class BlowfishCipher implements CipherInterface
 
         try {
             return $this->cipher->encrypt($plaintext);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             throw new EncryptionException(
                 'Blowfish encryption failed: ' . $e->getMessage(),
                 0,
@@ -150,7 +151,7 @@ final class BlowfishCipher implements CipherInterface
 
         try {
             return $this->cipher->decrypt($ciphertext);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             throw new DecryptionException(
                 'Blowfish decryption failed: ' . $e->getMessage(),
                 0,

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * A class that pretends to be a string.
  *

@@ -24,6 +24,8 @@ use Horde\Secret\Cipher\AesGcmCipher;
 use Horde\Secret\Cipher\BlowfishCipher;
 use Horde\Secret\Exception\DecryptionException;
 use Horde\Secret\Exception\UnsupportedCipherException;
+use Exception;
+use InvalidArgumentException;
 
 /**
  * Main facade for encryption/decryption with automatic cipher selection.
@@ -287,7 +289,7 @@ final class SecretManager
 
         try {
             return $this->legacyCipher->decrypt($ciphertext);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             throw new DecryptionException(
                 'Failed to decrypt legacy format: ' . $e->getMessage(),
                 0,
@@ -352,7 +354,7 @@ final class SecretManager
         if (is_string($encrypted)) {
             try {
                 $encrypted = EncryptedData::fromString($encrypted);
-            } catch (\InvalidArgumentException) {
+            } catch (InvalidArgumentException) {
                 // Invalid format = needs re-encryption
                 return true;
             }

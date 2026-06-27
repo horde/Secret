@@ -31,6 +31,7 @@ use PHPUnit\Framework\TestCase;
  * @package    Secret
  * @subpackage UnitTests
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
+ * @coversNothing
  */
 class Psr0Psr4IntegrationTest extends TestCase
 {
